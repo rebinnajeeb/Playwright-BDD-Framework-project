@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+
+# Logs & reports (keep the folders, ignore their contents)
+Logs/*
+!Logs/.gitkeep
+allure_reports/*
+!allure_reports/.gitkeep
+allure-results/
+
+# Sensitive - credentials and local scripts
+standalone_login_check.py
+TestData/LoginData.xlsx
