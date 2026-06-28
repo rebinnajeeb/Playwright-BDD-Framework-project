@@ -1,46 +1,54 @@
 import logging
 import allure
+from playwright.sync_api import expect
 from features.pageobjects.BasePage import BasePage
-from Utilities.configReader import readConfig
 from Utilities.LogUtil import Logger
 
 log = Logger(__name__, logging.INFO)
 
 
 class PreLoginPage(BasePage):
-    SECTION = "prelogin"
 
     def open(self, url):
         self.navigate_to(url)
 
     def accept_cookies(self):
         with allure.step("Accept cookies if shown"):
-            if self.is_visible(readConfig(self.SECTION, "cookie_btn")):
-                self.click(readConfig(self.SECTION, "cookie_btn"))
+            cookie_btn = self.page.locator("#onetrust-accept-btn-handler")
+            if cookie_btn.is_visible():
+                cookie_btn.click()
                 log.logger.info("Cookie banner accepted")
             else:
                 log.logger.info("Cookie banner not visible")
 
     def go_to_login(self):
-        self.click(readConfig(self.SECTION, "login_link"))
+        self.click("a.btn.btn-primary.CardBlock-cta[href*='SciProxyCaller']")
 
     def set_username(self, username):
-        self.fill(readConfig(self.SECTION, "username_field"), username)
+        with allure.step("Enter username"):
+            self.page.locator("//input[@id='j_username']").fill(username)
+            log.logger.info("Username entered")
 
     def click_continue(self):
-        self.click(readConfig(self.SECTION, "continue_btn"))
+        self.click("//button[contains(., 'Continue')]")
 
     def set_password(self, password):
-        self.fill(readConfig(self.SECTION, "password_field"), password)
+        with allure.step("Enter password"):
+            self.page.locator("//input[@id='j_password']").fill(password)
+            log.logger.info("Password entered")
 
     def submit_login(self):
-        self.click_by_role("button", "Log On")
+        with allure.step("Click Log On"):
+            self.page.get_by_role("button", name="Log On").click()
+            log.logger.info("Clicked Log On")
 
     def is_logged_in(self):
         with allure.step("Check if logged in"):
-            self.wait_for_url("**/partner-portal/**", timeout=30000)
+            self.page.wait_for_url("**/partner-portal/**", timeout=30000)
             try:
-                self.wait_for_visible(readConfig(self.SECTION, "welcome_text"), timeout=10000)
+                expect(
+                    self.page.get_by_text("Willkommen im AEG Partner Portal - Schön, dass Sie da sind")
+                ).to_be_visible(timeout=10000)
                 log.logger.info("Welcome text visible - login successful")
                 return True
             except AssertionError:
@@ -50,7 +58,9 @@ class PreLoginPage(BasePage):
     def is_error_shown(self):
         with allure.step("Check if login error message is shown"):
             try:
-                self.wait_for_visible(readConfig(self.SECTION, "error_msg"), timeout=10000)
+                expect(
+                    self.page.locator("#..globalMessages .fn-message-strip__text")
+                ).to_be_visible(timeout=10000)
                 log.logger.info("Error message visible - invalid login confirmed")
                 return True
             except AssertionError:
