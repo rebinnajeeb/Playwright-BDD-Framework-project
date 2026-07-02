@@ -15,10 +15,12 @@ class PreLoginPage(BasePage):
     def accept_cookies(self):
         with allure.step("Accept cookies if shown"):
             cookie_btn = self.page.locator("#onetrust-accept-btn-handler")
-            if cookie_btn.is_visible():
+            try:
+                expect(cookie_btn).to_be_visible(timeout=5000)
                 cookie_btn.click()
+                expect(cookie_btn).to_be_hidden(timeout=3000)
                 log.logger.info("Cookie banner accepted")
-            else:
+            except AssertionError:
                 log.logger.info("Cookie banner not visible")
 
     def go_to_login(self):
@@ -59,7 +61,7 @@ class PreLoginPage(BasePage):
         with allure.step("Check if login error message is shown"):
             try:
                 expect(
-                    self.page.locator("#..globalMessages .fn-message-strip__text")
+                    self.page.locator("#globalMessages .fn-message-strip__text")
                 ).to_be_visible(timeout=10000)
                 log.logger.info("Error message visible - invalid login confirmed")
                 return True

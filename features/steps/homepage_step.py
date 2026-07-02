@@ -8,6 +8,11 @@ def step_impl(context):
     context.home = HomePage(context.page)
 
 
+@then(u'I am on the home page')
+def step_impl(context):
+    context.home = HomePage(context.page)
+
+
 @when(u'I open the profile dropdown')
 def step_impl(context):
     context.home.open_profile_dropdown()

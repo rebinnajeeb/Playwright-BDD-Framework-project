@@ -1,0 +1,1 @@
+{"total":2,"items":[{"uid":"96112b67156097c0bdf7b8cb99fb3621","name":"AEG B2B Pre-Login Page","statistic":{"failed":0,"broken":1,"skipped":0,"passed":2,"unknown":0,"total":3}},{"uid":"0590bed49b7bb193af3cabfce5443261","name":"AEG B2B Logout","statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1}}]}
