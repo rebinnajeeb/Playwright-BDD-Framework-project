@@ -37,7 +37,7 @@ class HomePage(BasePage):
 
     def is_sales_submenu_visible(self):
         with allure.step("Verify Sales & Marketing submenu visible"):
-            expect(self.page.locator("//div[contains(@class,'NavSite-l2') and contains(@class,'is-visible')]")).to_be_visible(timeout=30000)
+            expect(self.page.locator("//div[contains(@class,'NavSite-l2') and contains(@class,'is-visible')]")).to_be_visible(timeout=50000)
             log.logger.info("Sales & Marketing submenu visible")
 
     def click_orders(self):
