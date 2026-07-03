@@ -5,6 +5,11 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  schedule:
+    - cron: '0 0 * * *'
+
+permissions:
+  contents: write
 
 jobs:
   test:
@@ -28,9 +33,16 @@ jobs:
       - name: Run Behave tests
         run: behave --tags=@navigation --no-capture -f allure_behave.formatter:AllureFormatter -o allure-results
 
-      - name: Upload Allure results
+      - name: Generate Allure report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: simple-elf/allure-report-action@master
         with:
-          name: allure-results
-          path: allure-results/
+          allure_results: allure-results
+
+      - name: Publish Allure report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
