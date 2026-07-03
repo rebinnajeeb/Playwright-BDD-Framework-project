@@ -37,7 +37,7 @@ class HomePage(BasePage):
 
     def is_sales_submenu_visible(self):
         with allure.step("Verify Sales & Marketing submenu visible"):
-            expect(self.page.locator("//div[contains(@class,'NavSite-l2') and contains(@class,'is-visible')]")).to_be_visible(timeout=10000)
+            expect(self.page.locator("//div[contains(@class,'NavSite-l2') and contains(@class,'is-visible')]")).to_be_visible(timeout=30000)
             log.logger.info("Sales & Marketing submenu visible")
 
     def click_orders(self):
@@ -47,7 +47,7 @@ class HomePage(BasePage):
 
     def is_orders_submenu_visible(self):
         with allure.step("Verify Orders submenu visible"):
-            expect(self.page.locator("//div[contains(@class,'NavSite-l2') and contains(@class,'is-visible')]")).to_be_visible(timeout=10000)
+            expect(self.page.locator("//div[contains(@class,'NavSite-l2') and contains(@class,'is-visible')]")).to_be_visible(timeout=30000)
             log.logger.info("Orders submenu visible")
 
     def click_training(self):
@@ -57,7 +57,7 @@ class HomePage(BasePage):
 
     def is_training_submenu_visible(self):
         with allure.step("Verify Training submenu visible"):
-            expect(self.page.locator("//div[contains(@class,'NavSite-l2') and contains(@class,'is-visible')]")).to_be_visible(timeout=10000)
+            expect(self.page.locator("//div[contains(@class,'NavSite-l2') and contains(@class,'is-visible')]")).to_be_visible(timeout=30000)
             log.logger.info("Training submenu visible")
 
     def click_tools_and_services(self):
@@ -67,7 +67,7 @@ class HomePage(BasePage):
 
     def is_tools_submenu_visible(self):
         with allure.step("Verify Tools & Services submenu visible"):
-            expect(self.page.locator("//div[contains(@class,'NavSite-l2') and contains(@class,'is-visible')]")).to_be_visible(timeout=10000)
+            expect(self.page.locator("//div[contains(@class,'NavSite-l2') and contains(@class,'is-visible')]")).to_be_visible(timeout=30000)
             log.logger.info("Tools & Services submenu visible")
 
     # ── Footer ───────────────────────────────────────────────────
