@@ -17,6 +17,6 @@ allure-results/
 
 # Sensitive - credentials and local scripts
 standalone_login_check.py
-TestData/LoginData.xlsx
+# TestData/LoginData.xlsx
 allure-reports/
 allure-results/

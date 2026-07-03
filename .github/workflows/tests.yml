@@ -23,7 +23,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Install Playwright browsers
-        run: playwright install chromium
+        run: playwright install chrome --with-deps
 
       - name: Run Behave tests
         run: behave --tags=@navigation --no-capture -f allure_behave.formatter:AllureFormatter -o allure-results
