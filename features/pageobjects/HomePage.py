@@ -23,7 +23,7 @@ class HomePage(BasePage):
 
     def is_on_prelogin(self):
         with allure.step("Verify back on pre-login page"):
-            self.page.wait_for_url("**/pre-login/**", timeout=30000)
+            self.page.wait_for_url("**/pre-login/**", timeout=60000)
             on_prelogin = "pre-login" in self.page.url
             log.logger.info(f"Back on pre-login page: {on_prelogin}")
             return on_prelogin

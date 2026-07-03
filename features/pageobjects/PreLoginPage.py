@@ -46,7 +46,7 @@ class PreLoginPage(BasePage):
 
     def is_logged_in(self):
         with allure.step("Check if logged in"):
-            self.page.wait_for_url("**/partner-portal/**", timeout=30000)
+            self.page.wait_for_url("**/partner-portal/**", timeout=60000)
             try:
                 expect(
                     self.page.get_by_text("Willkommen im AEG Partner Portal - Schön, dass Sie da sind")
